@@ -6,6 +6,8 @@ contextBridge.exposeInMainWorld("api", {
   getStatus: () => ipcRenderer.invoke("get-status"),
   closeWindow: () => ipcRenderer.invoke("close-window"),
   quitApp: () => ipcRenderer.invoke("quit-app"),
+  setAlwaysLunarLogo: (value) => ipcRenderer.invoke("set-always-lunar-logo", value),
+  getAlwaysLunarLogo: () => ipcRenderer.invoke("get-always-lunar-logo"),
   openExternal: (url) => shell.openExternal(url),
   onActivity: (cb) => ipcRenderer.on("activity", (_e, data) => cb(data)),
   onRpcStatus: (cb) => ipcRenderer.on("rpc-status", (_e, connected) => cb(connected)),

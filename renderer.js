@@ -15,6 +15,7 @@ const activityType = $("activity-type");
 const activityTitle = $("activity-title");
 const activityDetail = $("activity-detail");
 const btnLogout = $("btn-logout");
+const lunarLogoToggle = $("lunar-logo-toggle");
 
 const TYPE_LABELS = {
   watching: "Watching",
@@ -95,14 +96,26 @@ btnLogout.addEventListener("click", async () => {
 $("btn-minimize").addEventListener("click", () => window.api.closeWindow());
 $("btn-quit").addEventListener("click", () => window.api.quitApp());
 
+lunarLogoToggle.addEventListener("change", async () => {
+  const value = lunarLogoToggle.checked;
+  await window.api.setAlwaysLunarLogo(value);
+  try { localStorage.setItem("lunar_always_logo", value ? "1" : "0"); } catch {}
+});
+
 $("btn-get-token").addEventListener("click", () => window.api.openExternal("https://lunaranime.ru/presence-link"));
 $("github-link").addEventListener("click", (e) => {
   e.preventDefault();
-  window.api.openExternal("https://github.com/test");
+  window.api.openExternal("https://github.com/shadowTW/lunar-presence");
 });
 
 (async () => {
   try {
+    const savedLogo = localStorage.getItem("lunar_always_logo");
+    if (savedLogo === "1") {
+      lunarLogoToggle.checked = true;
+      await window.api.setAlwaysLunarLogo(true);
+    }
+
     const saved = localStorage.getItem("lunar_token");
     if (saved) await doLogin(saved);
   } catch {}

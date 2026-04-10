@@ -104,3 +104,21 @@ button.link-btn {
   text-decoration: none; text-align: center; display: block; width: 100%;
 }
 button.link-btn:hover { background: var(--accent); color: #fff; }
+
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 10px 14px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+}
+.toggle-label { font-size: 12px; color: var(--muted); }
+.toggle-checkbox {
+  appearance: none; width: 36px; height: 20px; border-radius: 10px;
+  background: var(--border); position: relative; cursor: pointer; transition: background 0.2s;
+}
+.toggle-checkbox::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--muted); transition: all 0.2s;
+}
+.toggle-checkbox:checked { background: var(--accent); }
+.toggle-checkbox:checked::after { left: 18px; background: #fff; }

@@ -4,7 +4,7 @@ const DiscordRPC = require("discord-rpc");
 
 const CLIENT_ID = "1255462235958939689";
 const API_BASE = "https://api.lunaranime.ru";
-const POLL_INTERVAL = 15_000;
+const POLL_INTERVAL = 5_000;
 const PROTOCOL = "lunaranime";
 
 let mainWindow = null;
@@ -13,6 +13,7 @@ let rpcClient = null;
 let pollTimer = null;
 let authToken = null;
 let rpcReady = false;
+let alwaysUseLunarLogo = false;
 
 const gotLock = app.requestSingleInstanceLock();
 if (!gotLock) {
@@ -77,6 +78,11 @@ async function pollActivity() {
   if (!authToken || !rpcReady) return;
 
   try {
+    fetch(`${API_BASE}/api/discord/heartbeat`, {
+      method: "POST",
+      headers: { Authorization: authToken },
+    }).catch(() => {});
+
     const res = await fetch(`${API_BASE}/api/discord/activity`, {
       headers: { Authorization: authToken },
     });
@@ -90,10 +96,14 @@ async function pollActivity() {
       return;
     }
 
+    const largeImage = alwaysUseLunarLogo
+      ? "lunar"
+      : (activity.image_url || "lunar");
+
     const presenceData = {
       details: activity.title,
       state: activity.detail || undefined,
-      largeImageKey: activity.image_url || "logo",
+      largeImageKey: largeImage,
       largeImageText: activity.title,
       smallImageKey: activityIcon(activity.activity_type),
       smallImageText: activityLabel(activity.activity_type),
@@ -213,6 +223,15 @@ ipcMain.handle("quit-app", () => {
   app.isQuitting = true;
   if (rpcClient) rpcClient.destroy().catch(() => {});
   app.quit();
+});
+
+ipcMain.handle("set-always-lunar-logo", (_event, value) => {
+  alwaysUseLunarLogo = !!value;
+  return { ok: true };
+});
+
+ipcMain.handle("get-always-lunar-logo", () => {
+  return alwaysUseLunarLogo;
 });
 
 app.whenReady().then(async () => {
