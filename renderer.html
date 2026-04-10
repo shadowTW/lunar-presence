@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LunarAnime Presence</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="titlebar">
+    <span>LUNAR PRESENCE</span>
+    <div class="titlebar-btns">
+      <button id="btn-minimize" title="Minimize to tray">−</button>
+      <button id="btn-quit" title="Quit">×</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="status-row">
+      <div class="dot" id="rpc-dot"></div>
+      <span id="rpc-label">Connecting to Discord…</span>
+    </div>
+
+    <div id="view-login" class="login-card">
+      <h2>Log In</h2>
+      <button class="link-btn" id="btn-get-token">Get Token from LunarAnime</button>
+      <div class="or-divider">or paste token manually</div>
+      <input id="token-input" type="password" placeholder="Paste your token…" autocomplete="off" />
+      <button id="btn-login" class="primary">Connect</button>
+      <div id="login-error" class="error-msg" style="display:none"></div>
+      <div class="open-source">This is an open source app: <a href="#" id="github-link">github.com/test</a></div>
+    </div>
+
+    <div id="view-main" style="display:none; width:100%; flex:1; flex-direction:column; align-items:center; gap:16px;">
+      <div class="profile-section">
+        <div class="username" id="display-username">—</div>
+        <div class="tag">Discord Rich Presence Active</div>
+      </div>
+
+      <div id="activity-container" class="activity-card" style="display:none">
+        <img id="activity-img" src="" alt="" />
+        <div class="info">
+          <div class="type" id="activity-type"></div>
+          <div class="title" id="activity-title"></div>
+          <div class="detail" id="activity-detail"></div>
+        </div>
+      </div>
+
+      <div id="no-activity" class="no-activity">
+        No activity right now.<br/>Open something on LunarAnime to show presence.
+      </div>
+
+      <div class="spacer"></div>
+      <button id="btn-logout" class="secondary">Log Out</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

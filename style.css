@@ -1,0 +1,106 @@
+:root {
+  --bg: #0a0a0f;
+  --card: #13131a;
+  --border: #1e1e2e;
+  --accent: #6366f1;
+  --accent-dim: #4f46e5;
+  --text: #e4e4e7;
+  --muted: #71717a;
+  --green: #22c55e;
+  --red: #ef4444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  user-select: none;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.titlebar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 36px; padding: 0 12px;
+  -webkit-app-region: drag;
+  background: var(--card); border-bottom: 1px solid var(--border);
+}
+.titlebar span { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
+.titlebar-btns { display: flex; gap: 6px; -webkit-app-region: no-drag; }
+.titlebar-btns button {
+  background: none; border: none; color: var(--muted);
+  font-size: 16px; cursor: pointer; width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center; border-radius: 4px;
+}
+.titlebar-btns button:hover { background: var(--border); color: var(--text); }
+
+.container {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 28px 24px; gap: 20px; height: calc(100vh - 36px);
+}
+
+.status-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.dot.connected { background: var(--green); }
+
+.login-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; width: 100%; display: flex; flex-direction: column; gap: 14px;
+}
+.login-card h2 { font-size: 16px; text-align: center; }
+.login-card p { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+input[type="password"], input[type="text"] {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; color: var(--text); font-size: 13px; outline: none; width: 100%;
+}
+input:focus { border-color: var(--accent); }
+
+button.primary {
+  background: var(--accent); border: none; border-radius: 8px; padding: 10px;
+  color: #fff; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.15s;
+}
+button.primary:hover { background: var(--accent-dim); }
+button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error-msg { color: var(--red); font-size: 12px; text-align: center; }
+
+.profile-section { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.profile-section .username { font-size: 18px; font-weight: 700; }
+.profile-section .tag { font-size: 12px; color: var(--muted); }
+
+.activity-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px; width: 100%; display: flex; gap: 14px; align-items: center;
+}
+.activity-card img { width: 64px; height: 90px; border-radius: 8px; object-fit: cover; background: var(--border); }
+.activity-card .info { flex: 1; min-width: 0; }
+.activity-card .info .type { font-size: 11px; color: var(--accent); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+.activity-card .info .title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; }
+.activity-card .info .detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+.no-activity { text-align: center; color: var(--muted); font-size: 13px; padding: 24px 0; }
+
+button.secondary {
+  background: none; border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 16px; color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.15s;
+}
+button.secondary:hover { border-color: var(--red); color: var(--red); }
+
+.spacer { flex: 1; }
+
+.or-divider {
+  display: flex; align-items: center; gap: 10px; width: 100%; color: var(--muted); font-size: 11px;
+}
+.or-divider::before, .or-divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--border);
+}
+
+button.link-btn {
+  background: none; border: 1px solid var(--accent); border-radius: 8px; padding: 10px;
+  color: var(--accent); font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.15s;
+  text-decoration: none; text-align: center; display: block; width: 100%;
+}
+button.link-btn:hover { background: var(--accent); color: #fff; }

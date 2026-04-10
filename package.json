@@ -1,0 +1,47 @@
+{
+  "name": "lunar-presence",
+  "version": "1.0.0",
+  "description": "LunarAnime Discord Rich Presence companion app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "ru.lunaranime.presence",
+    "productName": "LunarAnime Presence",
+    "protocols": {
+      "name": "LunarAnime Presence",
+      "schemes": ["lunaranime"]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.html",
+      "renderer.js",
+      "style.css"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  }
+}
